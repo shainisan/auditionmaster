@@ -12,5 +12,5 @@ Built on Flask and powered by the Librosa library for music and audio analysis, 
 
 I believe this app can transform how musicians prepare for auditions. Check out the attached demo video and dive into the full code in my portfolio. Here’s to empowering musicians with tech! 🎶🎼🎹
 
-## Here’s a demo of the app:
-[![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](https://youtu.be/4YCD8q_XttY)
+## Here’s a video of the app in action:
+[![Watch the video](https://github.com/shainisan/auditionmaster/blob/main/app.jpg)](https://youtu.be/4YCD8q_XttY)
