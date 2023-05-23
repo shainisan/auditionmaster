@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.plots-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+}
+
+
+.plot {
+    position: relative;
+    width: 100%; /* Adjust as necessary */
+    margin: 1em;
+    box-sizing: border-box; 
+}
+
+.plot img {
+    width: auto;  /* Adjust width automatically to image's width */
+    height: auto;
+}
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 123, 255, 0.3);
+    width: 100%; /* Adjust the width as desired */
+    transition: width 0.2s ease; /* Add transition effect for smooth resizing */
+    margin-left: 77px;
+  }
+  
