@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orchestra Auditions Metrics</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            flex-basis: 45%;
+        }
+
+        .section-title {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            color: #666666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .upload-form,
+        .record-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .upload-form input[type="file"],
+        .record-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .upload-form input[type="file"]:hover,
+        .upload-form input[type="file"]:focus,
+        .record-form button:hover,
+        .record-form button:focus {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        // Add your JavaScript code here
+    </script>
+</head>
+<body>
+    <h1>Welcome to "Orchestra Auditions Metrics"</h1>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">Upload High-Quality Recording</h2>
+            <p class="section-description">Enhance your orchestra auditions with advanced metrics and analysis.</p>
+            <form class="upload-form" action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                <input id="audio-file-input" type="file" name="audiofile" accept="audio/*" onchange="handleFileInputChange()">
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Record Inside the App</h2>
+            <p class="section-description">Capture your performance directly and get instant feedback.</p>
+            <form class="record-form" onsubmit="event.preventDefault()">
+                <audio id="audio-player" controls></audio>
+                <button class="record-btn" type="button" onclick="startRecording()">Record</button>
+                <button class="record-btn" type="button" onclick="stopRecording()">Stop Recording</button>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
