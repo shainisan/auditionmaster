@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        .total-score {
+            font-size: 36px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .plots-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .plot {
+            position: relative;
+        }
+
+        .plot img {
+            max-width: 100%;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: rgba(0, 123, 255, 0.3);
+            width: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Results</h1>
+
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Score</th>
+            <th>Explanation</th>
+        </tr>
+        <tr>
+            <td>Dynamics</td>
+            <td>{{ scores.loudness_score }}</td>
+            <td>Measures the overall loudness of the performance</td>
+        </tr>
+        <tr>
+            <td>Tempo</td>
+            <td>{{ scores.beat_diff_score }}</td>
+            <td>Assesses the accuracy and consistency of the timing and rhythm</td>
+        </tr>
+        <tr>
+            <td>Intonation</td>
+            <td>{{ scores.pitch_score }}</td>
+            <td>Evaluates the accuracy and correctness of the pitch</td>
+        </tr>
+        <tr>
+            <td>Tone Quality</td>
+            <td>{{ scores.contrast_score }}</td>
+            <td>Examines the richness, purity, and expressiveness of the tone</td>
+        </tr>
+        <tr>
+            <td>Timbre</td>
+            <td>{{ scores.timbre_score }}</td>
+            <td>Assesses the unique sound characteristics and color of the performance</td>
+        </tr>
+    </table>
+
+    <h2>Total Score</h2>
+    <div class="total-score">{{ total_score }}</div>
+
+    <audio controls id="audio-player">
+        <source src="{{ url_for('static', filename='uploads/' + filename) }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="plots-container">
+        <div class="plot">
+            <img src="{{ plots.combined_plots }}" alt="Combined Plots">
+            <div class="overlay"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script>
+        var plot = document.querySelector(".plot");
+        var overlay = plot.querySelector(".overlay");
+        var audioPlayer = document.getElementById("audio-player");
+        var plotImage = plot.querySelector("img");
+      
+        function syncPlot(time) {
+          var progressRatio = time / audioPlayer.duration;
+          var plotWidth = plotImage.clientWidth;
+          var overlayWidth = progressRatio * plotWidth * 0.87;
+          overlay.style.width = `${overlayWidth}px`;
+        }
+      
+        audioPlayer.addEventListener("timeupdate", function () {
+          syncPlot(this.currentTime);
+        });
+      
+        audioPlayer.addEventListener("loadedmetadata", function () {
+          syncPlot(0);
+        });
+      </script>
+      
+</body>
+</html>
